@@ -27,7 +27,7 @@
 # tamano_alfa = len(alfa)
 # #print(tamano_alfa)
 
-def parity(cadena):
+def parity_bits(cadena):
 	arr = list(cadena)
 	conteo = 0
 	paridad = 0
@@ -35,37 +35,33 @@ def parity(cadena):
 		if(i == '1'):
 			conteo += 1
 	if (conteo % 2 == 0):
-		return 1
+		return str(1)
 	else:
-		return 0
+		return str(0)
 
-seed = 100
-pq = 133
+def less_significant_bits(cadena):
+	return str(cadena[-1])
+
+seed = 317
+pq = 151 * 199
 
 x = []
+#x.append((seed ** 2) % pq)
 x.append(seed)
 
 for i in range(1 ,pq):
 	x.append( ( x[i - 1] ** 2 ) % pq )
 
-print(x)
-
 binary = []
-for j in range(1, 6):
+for j in range(1, 21):
 	binary.append(str(bin(x[j])).replace("0b",""))
 
+print("")
+
 for g in binary:
-	print(g)
+	print(str(int(g,2)) + "\t" + g)
 
-less_signifcant_bit = []
-for k in range( 0 , 5 ):
-	less_signifcant_bit.append((binary[k])[-1])
-
-parity_bit = []
-for h in range( 0 , 5 ):
-	parity_bit.append(str(parity(binary[h])))
-
-print(''.join(less_signifcant_bit))
-
-print(''.join(parity_bit))
+print("\nCLAVE CRIPTOGRAFICA")
+print(''.join(list(map(less_significant_bits,binary))))
+#print(''.join(list(map(parity_bits,binary))))
 
